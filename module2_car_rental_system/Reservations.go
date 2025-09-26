@@ -53,8 +53,6 @@ func (r *Reservations) Add(Id int, carId int, customer_Id int, start_date string
 }
 
 func (r *Reservations) modifyReservation(reservationId int, start_date string, end_date string) {
-	// res.start_date = start_date
-	// res.end_date = end_date
 	for i, exisiting := range *r {
 		if exisiting.Id == reservationId {
 			(*r)[i].start_date = start_date
