@@ -13,7 +13,6 @@ func main() {
 	fmt.Println("All car details -")
 	for _, car := range carService.GetAllCars() {
 		fmt.Println(car)
-
 	}
 	fmt.Println()
 	var reservationService ReservationService = &Reservations{}
@@ -30,8 +29,8 @@ func main() {
 		if reservationService.IsAvailable(id, "2024-01-19", "2024-02-20") {
 			fmt.Println(vehicle.model)
 		}
-
 	}
+
 	fmt.Println("\nChecking double reservation for same car")
 	fmt.Println(reservationService.Add(1, 3, 3, "2024-01-01", "2024-01-10"))
 	if reservationService.Add(1, 3, 3, "2024-01-20", "2024-01-30") == nil {
