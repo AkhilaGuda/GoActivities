@@ -1,4 +1,4 @@
-package main
+package customer
 
 type customer struct {
 	customer_Id    int

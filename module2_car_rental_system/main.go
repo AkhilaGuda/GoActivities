@@ -1,11 +1,14 @@
 package main
 
 import (
+	car "carRentalSystem/cars"
+	reservation "carRentalSystem/reservations"
+
 	"fmt"
 )
 
 func main() {
-	var carService CarService = Cars{}
+	var carService car.CarService = car.Cars{}
 	carService.Add(1, "Ford", "Ecosport", 2021, "LMNV", "TS071234", 2000)
 	carService.Add(4, "Ford", "Ecosport2", 2022, "LMNVp", "TS071334", 3000)
 	carService.Add(2, "Toyota", "Corolla", 2020, "ABC1234", "KA051234", 1500)
@@ -15,7 +18,7 @@ func main() {
 		fmt.Println(car)
 	}
 	fmt.Println()
-	var reservationService ReservationService = &Reservations{}
+	var reservationService reservation.ReservationService = &reservation.Reservations{}
 	reservationService.Add(1, 1, 1, "2024-01-01", "2024-01-10")
 	reservationService.Add(1, 2, 2, "2024-01-19", "2024-02-20")
 	reservationService.Add(1, 3, 3, "2024-01-01", "2024-01-10")
@@ -27,7 +30,7 @@ func main() {
 	fmt.Println("\nAvailable cars for specific dates: 2024-01-19 & 2024-02-20 ")
 	for id, vehicle := range carService.GetAllCars() {
 		if reservationService.IsAvailable(id, "2024-01-19", "2024-02-20") {
-			fmt.Println(vehicle.model)
+			fmt.Println(vehicle.Model)
 		}
 	}
 
@@ -42,13 +45,13 @@ func main() {
 		fmt.Println(reservation)
 	}
 
-	reservationService.modifyReservation(10, "2024-01-02", "2024-01-10")
+	reservationService.ModifyReservation(10, "2024-01-02", "2024-01-10")
 	fmt.Println("\n After modification :")
 	for _, reservation := range reservationService.GetAll() {
 		fmt.Println(reservation)
 	}
 	fmt.Println("\n Deleting reservation Id : 10")
-	reservationService.cancelReservation(10)
+	reservationService.CancelReservation(10)
 	for _, reservation := range reservationService.GetAll() {
 		fmt.Println(reservation)
 	}

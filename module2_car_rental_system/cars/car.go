@@ -1,12 +1,12 @@
-package main
+package car
 
 type Car struct {
-	make                 string
-	model                string
-	year                 int
-	license              string
-	plate_number         string
-	rental_price_per_day int
+	Make                 string
+	Model                string
+	Year                 int
+	License              string
+	Plate_number         string
+	Rental_price_per_day int
 }
 type CarService interface {
 	GetAllCars() []Car
@@ -16,6 +16,9 @@ type CarService interface {
 
 type Cars map[int]Car
 
+func NewCars() CarService {
+	return Cars{}
+}
 func (c Cars) GetAllCars() []Car {
 	var result []Car
 	for _, car := range c {
@@ -24,13 +27,13 @@ func (c Cars) GetAllCars() []Car {
 	return result
 }
 func (c Cars) Add(ID int, make string, model string, year int, license string, plate_number string, price int) {
-	c[ID] = Car{make: make, model: model, year: year, license: license, plate_number: plate_number, rental_price_per_day: price}
+	c[ID] = Car{Make: make, Model: model, Year: year, License: license, Plate_number: plate_number, Rental_price_per_day: price}
 }
 
 func (c Cars) AvailableCars(carType string, maxPrice int) []Car {
 	var result []Car
 	for _, car := range c {
-		if car.make == carType && car.rental_price_per_day <= maxPrice {
+		if car.Make == carType && car.Rental_price_per_day <= maxPrice {
 			result = append(result, car)
 		}
 	}
