@@ -1,8 +1,8 @@
 package main
 
 import (
-	car "carRentalSystem/cars"
-	reservation "carRentalSystem/reservations"
+	"carRentalSystem/car"
+	"carRentalSystem/reservation"
 
 	"fmt"
 )
