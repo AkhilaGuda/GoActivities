@@ -8,8 +8,11 @@
 - Handles errors like file not found or permission denied
 - Works with any text file
 
-# How to Run
-- go run file-reader.go
+# How to Run locally
+1. Clone the repository:
+    - git clone https://github.com/AkhilaGuda/GoActivities.git
+    - cd GoActivities/module2/module2_files
+    - go run file-reader.go
 
 # Error handling
 - Uses os.Open with error checks
