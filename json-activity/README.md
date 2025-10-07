@@ -1,0 +1,12 @@
+# JSON Data processor
+- created a User struct with fields Name,Age,Email,ImageURl, ImageB64 (image base 64 encoded information)
+- created wrapper struct for handling response users
+- In main function using http.Get method i.e, get request to server which returns response and error, response contains response code 200 or 404 and response body which is a stream of data
+- Then using io.ReadAll() which reads everything from stream into memory as a byte []
+- And using json.Unmarshal method converted json to structs and stored it in userResponse
+- For image base 64 conversion: Traversed the users data with http.Get method for each user imageUrl fetched it and converted it into bytes 
+- Then  updated the value of imageB64 by converting it to base64 with help of base64.StdEncodeToString() this function takes imageBytes and convert into base64 encoding 
+- Saving data into file : 
+    - with os.Create() function created file users_data.json
+    - json.NewEncoder creates tool encoder which helps to write go data directly into files,network or any io.Writer
+    - encoder.Encode(data) takes userResponse.Users and writes it as json to the file.
