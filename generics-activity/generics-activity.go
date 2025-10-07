@@ -49,9 +49,9 @@ func main() {
 	var stringQueue Queue[string]
 	stringQueue.Enqueue("trainees")
 	stringQueue.Enqueue("akhila")
-	stringQueue.Enqueue("rasagnya")
-	stringQueue.Enqueue("avinash")
-	stringQueue.Enqueue("vinay")
+	stringQueue.Enqueue("guda")
+	stringQueue.Enqueue("abcd")
+	stringQueue.Enqueue("efgh")
 	fmt.Println("Elements in queue: ", stringQueue)
 	val, ok := stringQueue.Dequeue()
 	if !ok {
