@@ -22,7 +22,7 @@ type wrapper struct {
 	Users []User `json:"users"`
 }
 
-func main() {
+func fetchData() []byte {
 	//get request to api
 	resp, err := http.Get("https://dummyjson.com/users?limit=100")
 	if err != nil {
@@ -36,11 +36,10 @@ func main() {
 	if err != nil {
 		log.Fatal("Error reading response: ", err)
 	}
+	return data
 
-	var usersResponse wrapper
-	if err := json.Unmarshal(data, &usersResponse); err != nil {
-		log.Fatal("Error unmarshalling JSON: ", err)
-	}
+}
+func base64Conversion(usersResponse wrapper) {
 	for i, user := range usersResponse.Users {
 		if user.ImageUrl == "" {
 			continue
@@ -62,11 +61,8 @@ func main() {
 		usersResponse.Users[i].ImageB64 = base64.StdEncoding.EncodeToString(imageBytes)
 		fmt.Println("Processed image :", user.Name)
 	}
-	fmt.Println("Data: ")
-	// fmt.Println(usersResponse.Users)
-	for i, user := range usersResponse.Users {
-		fmt.Println(i, user.Name, user.Age, user.Email, user.ImageUrl)
-	}
+}
+func storeInFile(usersResponse wrapper) {
 	file, err := os.Create("users_data.json")
 	if err != nil {
 		log.Fatal(err)
@@ -78,4 +74,19 @@ func main() {
 		log.Fatal(err)
 	}
 	log.Println("Saved in file users_data.json")
+}
+
+func main() {
+	data := fetchData()
+	var usersResponse wrapper
+	if err := json.Unmarshal(data, &usersResponse); err != nil {
+		log.Fatal("Error unmarshalling JSON: ", err)
+	}
+	base64Conversion(usersResponse)
+
+	fmt.Println("Data: ")
+	for i, user := range usersResponse.Users {
+		fmt.Println(i, user.Name, user.Age, user.Email, user.ImageUrl)
+	}
+	storeInFile(usersResponse)
 }
