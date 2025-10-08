@@ -20,4 +20,10 @@
     - case context done: work was cancelled due to closed connection or timeout
 
 ## How to run locally
-- 
+- Clone the repository: git clone https://github.com/AkhilaGuda/GoActivities.git 
+- cd context-activity
+- To run the activity : "go run context-activity.go"
+    - In terminal you can see : "Server starting on port 8080..."
+    - Then navigate to localhost:8080/process 
+    - In terminal you can see server logs i.e, Printing from go routine background work
+    - Once timer is exceeded We can see "Stopped due to context is timeout" because we set time context to 5 seconds after that duration it cancelled automatically
