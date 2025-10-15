@@ -31,7 +31,6 @@ func fetchUsers() ([]int, error) {
 func fetchUser(id int, ch chan<- User, sem chan bool) {
 	sem <- true              //acquire
 	defer func() { <-sem }() //release
-	// fmt.Println("starting request for user", id)
 	url := fmt.Sprintf("https://jsonplaceholder.typicode.com/users/%d", id)
 	resp, err := http.Get(url)
 	if err != nil {
@@ -39,7 +38,6 @@ func fetchUser(id int, ch chan<- User, sem chan bool) {
 		return
 	}
 	defer resp.Body.Close()
-	// fmt.Println("HTTP status for user ", id, resp.StatusCode)
 	if resp.StatusCode != 200 {
 		fmt.Println("Non 200 response ", id)
 		return
@@ -49,14 +47,14 @@ func fetchUser(id int, ch chan<- User, sem chan bool) {
 		fmt.Println("Error reading user ", id, "error: ", err)
 		return
 	}
-	// var UserResponse SingleUserResponse
+
 	var user User
 	err = json.Unmarshal(body, &user)
 	if err != nil {
 		fmt.Println("Error parsing user ", id, err)
 		return
 	}
-	// fmt.Println("Fetched user", UserResponse.Data)
+
 	ch <- user
 
 }
