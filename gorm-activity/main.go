@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gormActivity/repository"
+	"gormActivity/db"
 )
 
 func main() {
@@ -13,13 +13,13 @@ func main() {
 		fmt.Println("Please provide a table name using -table")
 		return
 	}
-	repository.DynamicTableName = *tableName
+	db.DynamicTableName = *tableName
 	fmt.Println("Table name: ", *tableName)
-	service, err := repository.NewBlogService()
+	service, err := db.NewBlogService()
 	if err != nil {
 		panic(err)
 	}
-	post := repository.GenericTable{Title: "Hello golang", Content: "This blog contains information about go lang"}
+	post := db.GenericTable{Title: "Hello golang", Content: "This blog contains information about go lang"}
 	if err := service.CreatePost(&post); err != nil {
 		fmt.Println("Error creating post:", err)
 	}
@@ -27,7 +27,7 @@ func main() {
 	fmt.Println("Added post: ", addedPost)
 	posts, _ := service.GetAllPosts()
 	fmt.Println("All posts:\n", posts)
-	service.UpdatePost(post.ID, repository.GenericTable{Title: "Golanguage", Content: "Updated content"})
+	service.UpdatePost(post.ID, db.GenericTable{Title: "Golanguage", Content: "Updated content"})
 	updatedPost, _ := service.GetPostByID(post.ID)
 	fmt.Println("Updated post: ", updatedPost)
 	service.DeletePost(post.ID)
