@@ -1,4 +1,4 @@
-package main
+package repository
 
 import "gorm.io/gorm"
 
@@ -7,6 +7,13 @@ type GenericTable struct {
 	gorm.Model
 	Title   string
 	Content string
+}
+
+var DynamicTableName string
+
+// TableName method dynamically changes tableName
+func (g GenericTable) TableName() string {
+	return DynamicTableName
 }
 
 // BlogService provides CRUD operations for blog posts

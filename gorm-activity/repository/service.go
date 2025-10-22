@@ -1,4 +1,4 @@
-package main
+package repository
 
 import (
 	"fmt"
@@ -10,15 +10,15 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-// TableName method dynamically changes tableName
-func (g GenericTable) TableName() string {
-	return DynamicTableName
-}
+// // TableName method dynamically changes tableName
+// func (g GenericTable) TableName() string {
+// 	return DynamicTableName
+// }
 
 // NewBlogService initializes a new Blogservice with database connection
 // It loads environment varirables for database connection
 // Runs AutoMigrate to create the table if it doesn't exists
-func NewBlogService() (*BlogService, error) {
+func NewBlogService() (BlogRepository, error) {
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("No .env file found")
