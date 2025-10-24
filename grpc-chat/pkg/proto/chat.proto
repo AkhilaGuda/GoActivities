@@ -1,0 +1,26 @@
+syntax = "proto3";
+package chat;
+option go_package = "grpcchat/proto/grpcchat";
+
+service CHAT{
+    rpc PrivateSend(MessageRequest) returns (MessageResponse);
+    rpc JoinChatRoom (JoinRequest) returns (stream ChatMessage);
+    rpc BidiChatRoom(stream ChatMessage) returns (stream ChatMessage);
+}
+message MessageRequest {
+    string from_id = 1;
+    string to_id = 2;
+    string message = 3;
+}
+message MessageResponse {
+    string  state = 1;
+}
+message JoinRequest {
+    string from_id = 1;
+    string room_id = 2;
+    string name = 3;
+}
+message ChatMessage {
+    string from_id = 1;
+    string message = 2; 
+}
