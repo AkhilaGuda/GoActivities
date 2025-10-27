@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package grpcgorm;
+
+option go_package = "grpcgorm/grpcgorm;grpcgorm";
+
+service GRPCGORM {
+    rpc Create(CreatePostRequest) returns (PostResponse);
+    rpc GetAll(Empty) returns (GetAllResponse);
+}
+
+message CreatePostRequest {
+    string title = 1;
+    string content = 2;
+}
+
+message PostResponse {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+}
+message Empty {}
+
+// Represents multiple posts (for GetAll)
+message GetAllResponse {
+    repeated PostResponse posts = 1;
+}
+
+
